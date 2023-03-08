@@ -1,0 +1,27 @@
+---Create a store database. I chose a bicycle store
+
+CREATE TABLE store (id INTEGER PRIMARY KEY, name TEXT, price INTEGER, color TEXT, quantity INTEGER);
+
+INSERT INTO store VALUES(1, "Roadrunner Adult", 170, "red", 17);
+INSERT INTO store VALUES(2, "Kitty Cat Trike", 85, "pink", 5);
+INSERT INTO store VALUES(3, "Speed Demon Boys", 112, "green", 15);
+INSERT INTO store VALUES(4, "Cool Breeze Girls", 115, "baby blue", 22);
+INSERT INTO store VALUES(5, "Bahama Mama Womens", 138, "yellow", 34);
+INSERT INTO store VALUES(6, "Tire Pump", 29, "black/chrome", 999);
+INSERT INTO store VALUES(7, "Patch Repair Kit", 14, "clear", 154);
+INSERT INTO store VALUES(8, "Seat-For-One Unicycle", 396, "gray", 3);
+INSERT INTO store VALUES(9, "Spare tire Adults", 99, "black", 43);
+INSERT INTO store VALUES(10, "Spare Tire Kids", 79, "white", 88);
+INSERT INTO store VALUES(11, "SECRET PRODUCT", 1000000, "everGREEN", 696);
+INSERT INTO store VALUES(12, "That WHITE girl", 500, "snow white", 888);
+INSERT INTO store VALUES(13, "Model T First Bike", 1500, "rusty brown", 150);
+INSERT INTO store VALUES(14, "Taste like Candy", 25255, "ebony", 1);
+INSERT INTO store VALUES(15, "Buy the entire store", 1, "dirt colored", 1);
+
+---display the database ordered by price
+SELECT * FROM store 
+ORDER BY price;
+
+---What is the highest costing item in my store
+SELECT MAX(price) FROM store;
+
