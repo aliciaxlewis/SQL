@@ -1,0 +1,62 @@
+--SELECT * FROM BIT_DB.customers LIMIT 20
+--order_id, acctnum
+--SELECT * FROM BIT_DB.JanSales;
+--orderID, Product, Quantity, price, orderdate, location
+-- both tables have order id in common
+SELECT * FROM BIT_DB.customers
+WHERE length(order_id) = 6
+AND order_id <> 'Order ID';
+
+/* How many orders were placed in January? */
+SELECT COUNT(orderID) FROM BIT_DB.JanSales
+WHERE length(orderID) = 6
+AND orderID <> "";
+--9,681
+
+/* How many of those orders were for an iPhone? */
+/*SELECT Product, COUNT(Product) p FROM BIT_DB.JanSales
+WHERE Product = 'iPhone'; My solution*/
+/*SELECT COUNT(orderid)
+FROM BIT_DB.JanSales
+WHERE Product='iPhone'
+AND length(orderid) = 6 
+AND orderid <> 'Order ID';     CC solution; same result*/
+--379
+
+/* Select the customer account numbers for all the orders that were placed in February. */
+SELECT fs.orderID, c.acctnum
+FROM BIT_DB.FebSales fs
+INNER JOIN BIT_DB.customers c
+ON fs.orderID = c.order_id
+WHERE length(orderID) = 6 ;
+
+/* Which product was the cheapest one sold in January, and what was the price? */
+SELECT Product, MIN(price) amount FROM BIT_DB.JanSales;
+--AAA Batteries (4-pack) for $2.99
+
+/* What is the total revenue for each product sold in January? 
+(Revenue can be calculated using the number of products sold and the price of the products). */
+SELECT Product, SUM(Quantity)*price revenue, price
+FROM BIT_DB.JanSales
+WHERE Product <> "" AND price <> 'Price Each'
+GROUP BY Product;
+
+/* Which products were sold in February at 548 Lincoln St, Seattle, WA 98101,
+ how many of each were sold, and what was the total revenue? */
+SELECT Product, SUM(Quantity) amt_sold, SUM(Quantity)*price revenue
+ FROM BIT_DB.FebSales
+ WHERE Product <> "" AND price <> 'Price Each'
+ AND location = '548 Lincoln St, Seattle, WA 98101'
+ GROUP BY Product; 
+ 
+/*How many customers ordered more than 2 products at a time in February,
+ and what was the average amount spent for those customers? */
+SELECT COUNT(DISTINCT c.acctnum) customers, AVG(Quantity)* price avgSales 
+FROM BIT_DB.customers c
+LEFT JOIN BIT_DB.FebSales fs
+ON c.order_id = fs.orderID
+WHERE LENGTH(fs.orderID) = 6
+AND fs.Quantity > 2
+AND fs.orderID <> 'Order ID' ;
+
+
