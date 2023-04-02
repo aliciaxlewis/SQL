@@ -59,4 +59,12 @@ WHERE LENGTH(fs.orderID) = 6
 AND fs.Quantity > 2
 AND fs.orderID <> 'Order ID' ;
 
+/*Advanced Data Filtering Techniques in SQL*/
+
+/* List all the products sold in Los Angeles in February, and include how many of each were sold.*/
+SELECT distinct Product, SUM(quantity) quantity, location 
+FROM BIT_DB.FebSales fs
+WHERE fs.location like '%Los Angeles%'
+GROUP BY Product
+
 
