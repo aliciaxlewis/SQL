@@ -65,6 +65,6 @@ AND fs.orderID <> 'Order ID' ;
 SELECT distinct Product, SUM(quantity) quantity, location 
 FROM BIT_DB.FebSales fs
 WHERE fs.location like '%Los Angeles%'
-GROUP BY Product
+GROUP BY Product;
 
 
